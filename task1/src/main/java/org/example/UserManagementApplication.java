@@ -1,11 +1,11 @@
-package org.example.jsonview;
+package org.example;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JsonViewApplication {
+public class UserManagementApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(JsonViewApplication.class, args);
+		SpringApplication.run(UserManagementApplication.class, args);
 	}
 }

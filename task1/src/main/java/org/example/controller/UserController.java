@@ -1,22 +1,21 @@
-package org.example.jsonview.controller;
+package org.example.controller;
 
-import org.example.jsonview.model.User;
-import org.example.jsonview.service.UserService;
-import org.example.jsonview.view.Views;
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.validation.Valid;
-import org.springframework.http.ResponseEntity;
+import lombok.RequiredArgsConstructor;
+import org.example.entity.User;
+import org.example.service.UserService;
+import org.example.dto.Views;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
+@RequiredArgsConstructor
 public class UserController {
 	private final UserService userService;
-
-	public UserController(UserService userService) {
-		this.userService = userService;
-	}
 
 	@GetMapping
 	@JsonView(Views.UserSummary.class)
@@ -31,6 +30,7 @@ public class UserController {
 	}
 
 	@PostMapping
+	@ResponseStatus(HttpStatus.CREATED)
 	@JsonView(Views.UserDetails.class)
 	public User createUser(@Valid @RequestBody User user) {
 		return userService.createUser(user);
@@ -38,13 +38,13 @@ public class UserController {
 
 	@PutMapping("/{id}")
 	@JsonView(Views.UserDetails.class)
-	public User updateUser(@PathVariable Long id, @Valid @RequestBody User user) {
-		return userService.updateUser(id, user);
+	public User updateUser(@PathVariable Long id, @Valid @RequestBody User userDetails) {
+		return userService.updateUser(id, userDetails);
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> deleteUser(@PathVariable Long id) {
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void deleteUser(@PathVariable Long id) {
 		userService.deleteUser(id);
-		return ResponseEntity.ok().build();
 	}
 }

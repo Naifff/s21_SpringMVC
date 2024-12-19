@@ -1,4 +1,4 @@
-package org.example.jsonview.exception;
+package org.example.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
 	public ResourceNotFoundException(String message) {

@@ -1,13 +1,27 @@
-package org.example.jsonview.model;
+package org.example.entity;
 
-import org.example.jsonview.view.Views;
 import com.fasterxml.jackson.annotation.JsonView;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.example.dto.Views;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "users")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class User {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JsonView(Views.UserSummary.class)
 	private Long id;
 
@@ -21,15 +35,6 @@ public class User {
 	private String email;
 
 	@JsonView(Views.UserDetails.class)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Order> orders = new ArrayList<>();
-
-	// Getters and setters
-	public Long getId() { return id; }
-	public void setId(Long id) { this.id = id; }
-	public String getName() { return name; }
-	public void setName(String name) { this.name = name; }
-	public String getEmail() { return email; }
-	public void setEmail(String email) { this.email = email; }
-	public List<Order> getOrders() { return orders; }
-	public void setOrders(List<Order> orders) { this.orders = orders; }
 }
