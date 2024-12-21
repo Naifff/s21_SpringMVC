@@ -47,8 +47,7 @@ public class OrderMapperService {
 	// Convert JSON string to a list of Orders
 	public List<Order> convertJsonToOrderList(String json) {
 		try {
-			return objectMapper.readValue(json, new TypeReference<List<Order>>() {
-			});
+			return objectMapper.readValue(json, new TypeReference<List<Order>>() {});
 		} catch (JsonProcessingException e) {
 			throw new RuntimeException("Error converting JSON to order list", e);
 		}

@@ -1,7 +1,6 @@
 package org.example.service;
 
 import org.example.config.JacksonConfig;
-import org.example.config.ObjectMapperConfig;
 import org.example.entity.Customer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,7 +16,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {JacksonConfig.class, OrderMapperService.class})
+@ContextConfiguration(classes = {JacksonConfig.class, CustomerMapperService.class})
 class CustomerMapperServiceTest {
 
 	@Autowired
@@ -51,10 +50,10 @@ class CustomerMapperServiceTest {
 		String json = customerMapperService.convertCustomerToJson(testCustomer);
 
 		// Then
-		assertTrue(json.contains("\"customerId\":1"));
-		assertTrue(json.contains("\"firstName\":\"John\""));
-		assertTrue(json.contains("\"lastName\":\"Doe\""));
-		assertTrue(json.contains("\"email\":\"john.doe@example.com\""));
+		assertTrue(json.contains("\"customerId\" : 1"));
+		assertTrue(json.contains("\"firstName\" : \"John\""));
+		assertTrue(json.contains("\"lastName\" : \"Doe\""));
+		assertTrue(json.contains("\"email\" : \"john.doe@example.com\""));
 	}
 
 	@Test
@@ -78,10 +77,10 @@ class CustomerMapperServiceTest {
 		String json = customerMapperService.convertCustomerListToJson(testCustomers);
 
 		// Then
-		assertTrue(json.contains("\"firstName\":\"John\""));
-		assertTrue(json.contains("\"firstName\":\"Jane\""));
-		assertTrue(json.contains("\"email\":\"john.doe@example.com\""));
-		assertTrue(json.contains("\"email\":\"jane.smith@example.com\""));
+		assertTrue(json.contains("\"firstName\" : \"John\""));
+		assertTrue(json.contains("\"firstName\" : \"Jane\""));
+		assertTrue(json.contains("\"email\" : \"john.doe@example.com\""));
+		assertTrue(json.contains("\"email\" : \"jane.smith@example.com\""));
 	}
 
 	@Test

@@ -1,7 +1,6 @@
 package org.example.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.config.ObjectMapperConfig;
+import org.example.config.JacksonConfig;
 import org.example.entity.Product;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +17,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {ObjectMapperConfig.class, ProductMapperService.class})
+@ContextConfiguration(classes = {JacksonConfig.class, ProductMapperService.class})
 class ProductMapperServiceTest {
 
 	@Autowired
@@ -51,10 +50,10 @@ class ProductMapperServiceTest {
 		String json = productMapperService.convertProductToJson(testProduct);
 
 		// Then
-		assertTrue(json.contains("\"productId\":1"));
-		assertTrue(json.contains("\"name\":\"Test Product\""));
-		assertTrue(json.contains("\"price\":99.99"));
-		assertTrue(json.contains("\"quantityInStock\":10"));
+		assertTrue(json.contains("\"productId\" : 1"));
+		assertTrue(json.contains("\"name\" : \"Test Product\""));
+		assertTrue(json.contains("\"price\" : 99.99"));
+		assertTrue(json.contains("\"quantityInStock\" : 10"));
 	}
 
 	@Test
@@ -78,10 +77,10 @@ class ProductMapperServiceTest {
 		String json = productMapperService.convertProductListToJson(testProducts);
 
 		// Then
-		assertTrue(json.contains("\"productId\":1"));
-		assertTrue(json.contains("\"productId\":2"));
-		assertTrue(json.contains("\"name\":\"Test Product\""));
-		assertTrue(json.contains("\"name\":\"Test Product 2\""));
+		assertTrue(json.contains("\"productId\" : 1"));
+		assertTrue(json.contains("\"productId\" : 2"));
+		assertTrue(json.contains("\"name\" : \"Test Product\""));
+		assertTrue(json.contains("\"name\" : \"Test Product 2\""));
 	}
 
 	@Test

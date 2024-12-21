@@ -1,7 +1,6 @@
 package org.example.service;
 
 import org.example.config.JacksonConfig;
-import org.example.config.ObjectMapperConfig;
 import org.example.entity.Customer;
 import org.example.entity.Order;
 import org.example.entity.OrderStatus;
@@ -90,11 +89,11 @@ class OrderMapperServiceTest {
 		String json = orderMapperService.convertOrderToJson(testOrder);
 
 		// Then
-		assertTrue(json.contains("\"orderId\":1"));
-		assertTrue(json.contains("\"firstName\":\"John\""));
-		assertTrue(json.contains("\"shippingAddress\":\"123 Test St\""));
-		assertTrue(json.contains("\"totalPrice\":249.98"));
-		assertTrue(json.contains("\"orderStatus\":\"PENDING\""));
+		assertTrue(json.contains("\"orderId\" : 1"));
+		assertTrue(json.contains("\"firstName\" : \"John\""));
+		assertTrue(json.contains("\"shippingAddress\" : \"123 Test St\""));
+		assertTrue(json.contains("\"totalPrice\" : 249.98"));
+		assertTrue(json.contains("\"orderStatus\" : \"PENDING\""));
 	}
 
 	@Test
@@ -120,12 +119,12 @@ class OrderMapperServiceTest {
 		String json = orderMapperService.convertOrderListToJson(testOrders);
 
 		// Then
-		assertTrue(json.contains("\"orderId\":1"));
-		assertTrue(json.contains("\"orderId\":2"));
-		assertTrue(json.contains("\"shippingAddress\":\"123 Test St\""));
-		assertTrue(json.contains("\"shippingAddress\":\"456 Test Ave\""));
-		assertTrue(json.contains("\"orderStatus\":\"PENDING\""));
-		assertTrue(json.contains("\"orderStatus\":\"CONFIRMED\""));
+		assertTrue(json.contains("\"orderId\" : 1"));
+		assertTrue(json.contains("\"orderId\" : 2"));
+		assertTrue(json.contains("\"shippingAddress\" : \"123 Test St\""));
+		assertTrue(json.contains("\"shippingAddress\" : \"456 Test Ave\""));
+		assertTrue(json.contains("\"orderStatus\" : \"PENDING\""));
+		assertTrue(json.contains("\"orderStatus\" : \"CONFIRMED\""));
 	}
 
 	@Test
@@ -231,6 +230,7 @@ class OrderMapperServiceTest {
 		assertEquals(OrderStatus.SHIPPED, result.getOrderStatus());
 		assertEquals("9876543210", result.getCustomer().getContactNumber());
 		// Verify other fields remain unchanged
+
 		assertEquals(testOrder.getCustomer().getFirstName(), result.getCustomer().getFirstName());
 		assertEquals(testOrder.getTotalPrice(), result.getTotalPrice());
 	}
